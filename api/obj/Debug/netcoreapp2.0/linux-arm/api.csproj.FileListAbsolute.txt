@@ -1,0 +1,13 @@
+D:\Git\peiper-api\api\bin\Debug\netcoreapp2.0\linux-arm\libhostpolicy.so
+D:\Git\peiper-api\api\bin\Debug\netcoreapp2.0\linux-arm\libhostfxr.so
+D:\Git\peiper-api\api\bin\Debug\netcoreapp2.0\linux-arm\api
+D:\Git\peiper-api\api\bin\Debug\netcoreapp2.0\linux-arm\api.deps.json
+D:\Git\peiper-api\api\bin\Debug\netcoreapp2.0\linux-arm\api.runtimeconfig.json
+D:\Git\peiper-api\api\bin\Debug\netcoreapp2.0\linux-arm\api.runtimeconfig.dev.json
+D:\Git\peiper-api\api\bin\Debug\netcoreapp2.0\linux-arm\api.dll
+D:\Git\peiper-api\api\bin\Debug\netcoreapp2.0\linux-arm\api.pdb
+D:\Git\peiper-api\api\obj\Debug\netcoreapp2.0\linux-arm\api.csproj.CoreCompileInputs.cache
+D:\Git\peiper-api\api\obj\Debug\netcoreapp2.0\linux-arm\api.AssemblyInfoInputs.cache
+D:\Git\peiper-api\api\obj\Debug\netcoreapp2.0\linux-arm\api.AssemblyInfo.cs
+D:\Git\peiper-api\api\obj\Debug\netcoreapp2.0\linux-arm\api.dll
+D:\Git\peiper-api\api\obj\Debug\netcoreapp2.0\linux-arm\api.pdb
