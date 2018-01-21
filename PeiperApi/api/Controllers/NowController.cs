@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using api.Models;
 using api.Repository;
@@ -29,10 +30,10 @@ namespace api.Controllers
             return new BaseResponse<int>(value);
         }
 
-        [HttpGet("dptest")]
-        public BaseResponse<List<Test>> DbTest()
+        [HttpGet("dtest")]
+        public async Task<BaseResponse<List<Test>>> DbTest()
         {
-            var list = _repository.GetAll();
+            var list = await _repository.GetAll();
             return new BaseResponse<List<Test>>(list);
         }
     }

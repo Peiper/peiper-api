@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace api.Repository
 {
     public interface ITestRepository
     {
-        List<Test> GetAll();
+        Task<List<Test>> GetAll();
     }
     public class TestRepository : ITestRepository
     {
@@ -15,9 +17,9 @@ namespace api.Repository
             _context = context;
         }
 
-        public List<Test> GetAll()
+        public async Task<List<Test>> GetAll()
         {
-            return _context.TestData.Where(t => t.Var1 != "").ToList();
+            return await _context.TestData.ToListAsync();
         }
     }
 }
