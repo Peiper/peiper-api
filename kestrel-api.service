@@ -2,8 +2,8 @@
 Description=Peiper .NET Web API App Running on Raspbian Stretch
 
 [Service]
-WorkingDirectory=/usr/git/peiper-api/api/bin/Debug/netcoreapp2.0/linux-arm/publish
-ExecStart=/usr/git/peiper-api/api/bin/Debug/netcoreapp2.0/linux-arm/publish/api
+WorkingDirectory=/usr/git/peiper-api/publish
+ExecStart=/usr/git/peiper-api/publish/PeiperApi
 Restart=always
 RestartSec=10  # Restart service after 10 seconds if dotnet service crashes
 SyslogIdentifier=dotnet-example
