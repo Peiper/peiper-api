@@ -5,14 +5,14 @@ namespace api.Repository
 {
     public class Test : CommonEntity
     {
-        public string Var1 { get; set; }
-        public string Var2 { get; set; }
+        public string var1 { get; set; }
+        public string var2 { get; set; }
     }
 
     public class CommonEntity
     {
         [Key]
-        public int Id { get; set; }
+        public int id { get; set; }
     }
 
     public class DbPsqlContext : DbContext
