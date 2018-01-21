@@ -15,10 +15,6 @@ namespace api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<MvcOptions>(options =>
-            {
-                options.Filters.Add(new RequireHttpsAttribute());
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,9 +24,6 @@ namespace api
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            var options = new RewriteOptions()
-                .AddRedirectToHttps();
 
             app.Run(async (context) =>
             {
