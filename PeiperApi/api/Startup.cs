@@ -24,6 +24,8 @@ namespace api
 
             var connectionString = Configuration.GetConnectionString("DbContext");
             services.AddEntityFrameworkNpgsql().AddDbContext<DbPsqlContext>(options => options.UseNpgsql(connectionString));
+
+            services.AddSingleton<ITestRepository, TestRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

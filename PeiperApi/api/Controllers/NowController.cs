@@ -1,11 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using api.Models;
+using api.Repository;
 
 namespace api.Controllers
 {
     [Route("api/[controller]")]
     public class NowController : Controller
     {
+        private readonly ITestRepository _repository;
+
+        public NowController(ITestRepository repository)
+        {
+            _repository = repository;
+        }
+
         [HttpGet]
         public BaseResponse<string> Now()
         {
@@ -18,6 +27,13 @@ namespace api.Controllers
         {
             var value = a + b;
             return new BaseResponse<int>(value);
+        }
+
+        [HttpGet("dptest")]
+        public BaseResponse<List<Test>> DbTest()
+        {
+            var list = _repository.GetAll();
+            return new BaseResponse<List<Test>>(list);
         }
     }
 }
