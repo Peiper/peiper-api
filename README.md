@@ -5,6 +5,5 @@ api for peiper.se
 dotnet publish -r linux-arm -o d:\git\peiper-api\publish
 
 # To run
-systemctl start kestrel-api.service
+Pull to server
 systemctl restart kestrel-api.service
-systemctl stop kestrel-api.service
