@@ -13,9 +13,12 @@ namespace api.Repository
     }
     public class DbPsqlContext : DbContext
     {
-        public DbPsqlContext(DbContextOptions<DbContext> options) : base(options) { }
-
         public DbSet<Test> TestData { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql(@"Server=localhost;Database=peiper;user=pi;password=niklas89");
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

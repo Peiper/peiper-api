@@ -22,11 +22,10 @@ namespace api
             services.AddMvc();
             services.AddCors();
 
-            var connectionString = Configuration.GetConnectionString("DbContext");
-            services.AddEntityFrameworkNpgsql().AddDbContext<DbPsqlContext>(options => options.UseNpgsql(connectionString));
-
             services.AddScoped<DbContext, DbPsqlContext>();
             services.AddScoped<ITestRepository, TestRepository>();
+
+            services.AddEntityFrameworkNpgsql().AddDbContext<DbPsqlContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
