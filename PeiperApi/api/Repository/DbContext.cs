@@ -21,7 +21,7 @@ namespace api.Repository
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(@"Server=localhost;Database=peiper;user=pi;password=niklas89");
+            optionsBuilder.UseNpgsql(@"Server=localhost;Database=peiper;Username=pi;Password=niklas89");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

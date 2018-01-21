@@ -30,7 +30,7 @@ namespace api.Controllers
             return new BaseResponse<int>(value);
         }
 
-        [HttpGet("dtest")]
+        [HttpGet("dbtest")]
         public async Task<BaseResponse<List<Test>>> DbTest()
         {
             var list = await _repository.GetAll();
