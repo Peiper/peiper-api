@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using api.Models;
 using api.Repository;
 using Microsoft.AspNetCore.Mvc;
 using PeiperApi.Domain.Models;

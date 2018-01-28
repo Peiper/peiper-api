@@ -1,5 +1,4 @@
-﻿using api.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using PeiperApi.Domain.Models;
 using PeiperApi.Domain.Models.Deploy;
