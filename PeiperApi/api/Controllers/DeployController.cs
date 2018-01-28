@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using api.Application;
 using api.Repository;
 using Microsoft.AspNetCore.Mvc;
 using PeiperApi.Domain.Models;
@@ -9,9 +10,9 @@ namespace api.Controllers
     [Route("api/[controller]")]
     public class DeployController : Controller
     {
-        private readonly IDeployRepository _repository;
+        private readonly IDeployApplication _repository;
 
-        public DeployController(IDeployRepository repository)
+        public DeployController(IDeployApplication repository)
         {
             _repository = repository;
         }
@@ -22,6 +23,14 @@ namespace api.Controllers
         {
             var value = _repository.GetSiteBuildData(count);
             return new Response<List<BuildData>>(value);
+        }
+
+        [HttpPost]
+        [Route("/sitebuilds/{id}")]
+        public Response<BuildData> SaveSiteBuild(BuildData data)
+        {
+            var value = _repository.SaveSiteBuild(data);
+            return new Response<BuildData>(value);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using api.Repository;
+﻿using api.Application;
+using api.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,7 @@ namespace api
 
             services.AddScoped<DbContext, DbPsqlContext>();
             services.AddScoped<IDeployRepository, DeployRepository>();
+            services.AddScoped<IDeployApplication, DeployApplication>();
 
             services.AddEntityFrameworkNpgsql().AddDbContext<DbPsqlContext>();
         }
