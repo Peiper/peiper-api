@@ -6,6 +6,11 @@ namespace PeiperApi.Domain.Models
     {
         public T Result { get; set; }
         public Exception Exception { get; set; }
+
+        public Response()
+        {
+            
+        }
         public Response(T value)
         {
             Result = value;

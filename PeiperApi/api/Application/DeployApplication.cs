@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using api.Repository;
 using PeiperApi.Domain.Models.Deploy;
 
@@ -29,7 +30,22 @@ namespace api.Application
                 return _repository.CreateSiteBuild(data);
             }
 
-            return _repository.UpdateSiteBuild(data);
+            return UpdateSiteBuild(data);
+        }
+
+        private BuildData UpdateSiteBuild(BuildData data)
+        {
+            var dbdata = _repository.Get(data.id);
+            if (dbdata == null)
+            {
+                throw new ArgumentException("data not found");
+            }
+
+            dbdata.status = data.status;
+            dbdata.updated = DateTime.Now;
+
+            _repository.SaveChanges();
+            return dbdata;
         }
     }
 }

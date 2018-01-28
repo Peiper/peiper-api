@@ -8,8 +8,9 @@ namespace api.Repository
     public interface IDeployRepository
     {
         List<BuildData> GetSiteBuildData(int count);
+        BuildData Get(int id);
         BuildData CreateSiteBuild(BuildData data);
-        BuildData UpdateSiteBuild(BuildData data);
+        void SaveChanges();
     }
     public class DeployRepository : IDeployRepository
     {
@@ -24,6 +25,11 @@ namespace api.Repository
             return _context.SiteBuildData.OrderByDescending(bd => bd.created).Take(count).ToList();
         }
 
+        public BuildData Get(int id)
+        {
+            return _context.SiteBuildData.First(sb => sb.id == id);
+        }
+
         public BuildData CreateSiteBuild(BuildData data)
         {
             _context.SiteBuildData.Add(data);
@@ -31,12 +37,9 @@ namespace api.Repository
             return data;
         }
 
-        public BuildData UpdateSiteBuild(BuildData data)
+        public void SaveChanges()
         {
-            data.updated = DateTime.Now;
-            _context.Update(data);
             _context.SaveChanges();
-            return data;
         }
     }
 }
