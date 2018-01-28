@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace api.Models
+namespace PeiperApi.Domain.Models
 {
-    public class BaseResponse<T>
+    public class Response<T>
     {
         public T Result { get; set; }
         public Exception Exception { get; set; }
-        public BaseResponse(T value)
+        public Response(T value)
         {
             Result = value;
         }

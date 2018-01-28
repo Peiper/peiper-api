@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PeiperApi.Domain.Models;
 
 namespace api
 {
@@ -22,8 +23,10 @@ namespace api
             services.AddMvc();
             services.AddCors();
 
+            services.Configure<DbSettings>(Configuration.GetSection("DbSettings"));
+
             services.AddScoped<DbContext, DbPsqlContext>();
-            services.AddScoped<ITestRepository, TestRepository>();
+            services.AddScoped<IDeployRepository, DeployRepository>();
 
             services.AddEntityFrameworkNpgsql().AddDbContext<DbPsqlContext>();
         }
