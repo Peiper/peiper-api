@@ -1,4 +1,6 @@
-﻿namespace PeiperApi.Domain.Models.Deploy
+﻿using System;
+
+namespace PeiperApi.Domain.Models.Deploy
 {
     public enum BuildStatus
     {
@@ -9,5 +11,12 @@
     public class BuildData : Entity
     {
         public string status { get; set; }
+
+        public BuildData()
+        {
+            id = 0;
+            created = DateTime.Now;
+            status = BuildStatus.STARTED.ToString();
+        }
     }
 }

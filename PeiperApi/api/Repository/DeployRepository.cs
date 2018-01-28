@@ -21,7 +21,7 @@ namespace api.Repository
 
         public List<BuildData> GetSiteBuildData(int count)
         {
-            return _context.SiteBuildData.Take(count).ToList();
+            return _context.SiteBuildData.OrderByDescending(bd => bd.created).Take(count).ToList();
         }
 
         public BuildData CreateSiteBuild(BuildData data)

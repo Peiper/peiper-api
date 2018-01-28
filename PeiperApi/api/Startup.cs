@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PeiperApi.Domain.Models;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace api
 {
@@ -26,6 +27,11 @@ namespace api
 
             services.Configure<DbSettings>(Configuration.GetSection("DbSettings"));
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Peiper API", Version = "v1" });
+            });
+
             services.AddScoped<DbContext, DbPsqlContext>();
             services.AddScoped<IDeployRepository, DeployRepository>();
             services.AddScoped<IDeployApplication, DeployApplication>();
@@ -40,6 +46,14 @@ namespace api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Peiper API V1");
+            });
 
             var origin = env.IsDevelopment() ? "http://localhost:9000" : "https://peiper.se";
             app.UseCors(builder =>

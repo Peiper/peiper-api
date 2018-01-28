@@ -26,8 +26,8 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        [Route("/sitebuilds/{id}")]
-        public Response<BuildData> SaveSiteBuild(BuildData data)
+        [Route("/sitebuilds")]
+        public Response<BuildData> SaveSiteBuild([FromBody] BuildData data)
         {
             var value = _repository.SaveSiteBuild(data);
             return new Response<BuildData>(value);
