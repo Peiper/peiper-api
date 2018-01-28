@@ -18,7 +18,7 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        [Route("/sitebuilds/{count}")]
+        [Route("sitebuilds/{count}")]
         public Response<List<BuildData>> GetSiteBuilds(int count)
         {
             var value = _repository.GetSiteBuildData(count);
@@ -26,7 +26,7 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        [Route("/sitebuilds")]
+        [Route("sitebuilds")]
         public Response<BuildData> SaveSiteBuild([FromBody] BuildData data)
         {
             var value = _repository.SaveSiteBuild(data);

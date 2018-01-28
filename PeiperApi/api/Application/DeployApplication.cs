@@ -25,9 +25,9 @@ namespace api.Application
 
         public BuildData SaveSiteBuild(BuildData data)
         {
-            if (data.id == 0)
+            if (data == null || data.id == 0)
             {
-                return _repository.CreateSiteBuild(data);
+                return _repository.CreateSiteBuild(new BuildData());
             }
 
             return UpdateSiteBuild(data);
