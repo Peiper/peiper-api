@@ -1,20 +1,22 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 using api.Application;
 using api.Repository;
 using Microsoft.AspNetCore.Mvc;
 using PeiperApi.Domain.Models;
 using PeiperApi.Domain.Models.Deploy;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace api.Controllers
 {
     [Route("api/[controller]")]
     public class DeployController : Controller
     {
-        private readonly IDeployApplication _repository;
+        private readonly IDeployApplication _application;
 
-        public DeployController(IDeployApplication repository)
+        public DeployController(IDeployApplication application)
         {
-            _repository = repository;
+            _application = application;
         }
 
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(Response<List<BuildData>>), Description = "GetSiteBuilds")]
@@ -25,7 +27,7 @@ namespace api.Controllers
             if(count == 0){
                 return BadRequest();
             }
-            var value = _repository.GetSiteBuildData(count);
+            var value = _application.GetSiteBuildData(count);
             return Ok(new Response<List<BuildData>>(value));
         }
 
@@ -37,7 +39,7 @@ namespace api.Controllers
             if(data == null){
                 return BadRequest();
             }
-            var value = _repository.SaveSiteBuild(data);
+            var value = _application.SaveSiteBuild(data);
             return Ok(new Response<BuildData>(value));
         }
     }

@@ -16,14 +16,18 @@ namespace PeiperApi.Domain.Models.Deploy
 
         public BuildData()
         {
+            
+        }
+        public void BuildDataSetup()
+        {
             id = 0;
             created = DateTime.Now;
             status = BuildStatus.STARTED.ToString();
         }
-        
+
         public BuildData(string hash, string message)
         {
-            this = BuildData();
+            BuildDataSetup();
             this.hash = hash;
             this.message = message;
         }
