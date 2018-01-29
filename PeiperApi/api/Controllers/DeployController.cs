@@ -17,20 +17,28 @@ namespace api.Controllers
             _repository = repository;
         }
 
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(Response<List<BuildData>>), Description = "GetSiteBuilds")]
         [HttpGet]
         [Route("sitebuilds/{count}")]
-        public Response<List<BuildData>> GetSiteBuilds(int count)
+        public IActionResult GetSiteBuilds(int count)
         {
+            if(count == 0){
+                return BadRequest();
+            }
             var value = _repository.GetSiteBuildData(count);
-            return new Response<List<BuildData>>(value);
+            return Ok(new Response<List<BuildData>>(value));
         }
 
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(Response<BuildData>), Description = "SaveSiteBuild")]
         [HttpPost]
         [Route("sitebuilds")]
-        public Response<BuildData> SaveSiteBuild([FromBody] BuildData data)
+        public IActionResult SaveSiteBuild([FromBody] BuildData data)
         {
+            if(data == null){
+                return BadRequest();
+            }
             var value = _repository.SaveSiteBuild(data);
-            return new Response<BuildData>(value);
+            return Ok(new Response<BuildData>(value));
         }
     }
 }
