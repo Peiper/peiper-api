@@ -21,11 +21,11 @@ namespace PeiperApi.Domain.Models.Deploy
             status = BuildStatus.STARTED.ToString();
         }
         
-        public BuildData(BuildData data)
+        public BuildData(string hash, string message)
         {
             this = BuildData();
-            hash = data.hash;
-            message = data.message;
+            this.hash = hash;
+            this.message = message;
         }
     }
 }
