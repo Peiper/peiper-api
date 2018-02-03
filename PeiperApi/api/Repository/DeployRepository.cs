@@ -1,45 +1,51 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.Linq;
 using PeiperApi.Domain.Models.Deploy;
+using Raven.Client.Documents;
 
 namespace api.Repository
 {
     public interface IDeployRepository
     {
-        List<BuildData> GetSiteBuildData(int count);
-        BuildData Get(int id);
-        BuildData CreateSiteBuild(BuildData data);
-        void SaveChanges();
+        List<SiteBuild> GetSiteBuildData(int count);
+        SiteBuild Get(string id);
+        SiteBuild StoreSiteBuild(SiteBuild data);
     }
+
     public class DeployRepository : IDeployRepository
     {
-        private readonly DbPsqlContext _context;
-        public DeployRepository(DbPsqlContext context)
+        private readonly IDocumentStore _store;
+        public DeployRepository(IDocumentStoreHolder store)
         {
-            _context = context;
+            _store = store.StoreDeploy;
         }
 
-        public List<BuildData> GetSiteBuildData(int count)
+        public List<SiteBuild> GetSiteBuildData(int count)
         {
-            return _context.SiteBuildData.OrderByDescending(bd => bd.created).Take(count).ToList();
+            using (var session = _store.OpenSession())
+            {
+               return session.Query<SiteBuild>().ToList().OrderByDescending(bd => bd.Created).Take(count).ToList();
+            }
         }
 
-        public BuildData Get(int id)
+        public SiteBuild Get(string id)
         {
-            return _context.SiteBuildData.First(sb => sb.id == id);
+            using (var session = _store.OpenSession())
+            {
+                return  session.Load<SiteBuild>(id);
+            }
         }
 
-        public BuildData CreateSiteBuild(BuildData data)
+        public SiteBuild StoreSiteBuild(SiteBuild data)
         {
-            _context.SiteBuildData.Add(data);
-            _context.SaveChanges();
-            return data;
-        }
+            using (var session = _store.OpenSession())
+            {
+                session.Store(data);
+                session.SaveChanges();
 
-        public void SaveChanges()
-        {
-            _context.SaveChanges();
+                return data;
+            }
         }
     }
 }

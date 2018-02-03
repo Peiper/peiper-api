@@ -26,18 +26,15 @@ namespace api
             services.AddMvc();
             services.AddCors();
 
-            services.Configure<DbSettings>(Configuration.GetSection("DbSettings"));
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Peiper API", Version = "v1" });
             });
 
-            services.AddScoped<DbContext, DbPsqlContext>();
             services.AddScoped<IDeployRepository, DeployRepository>();
             services.AddScoped<IDeployApplication, DeployApplication>();
 
-            services.AddEntityFrameworkNpgsql().AddDbContext<DbPsqlContext>();
+            services.AddSingleton<IDocumentStoreHolder, DocumentStoreHolder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

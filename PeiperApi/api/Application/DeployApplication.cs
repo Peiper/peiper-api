@@ -7,8 +7,8 @@ namespace api.Application
 {
     public interface IDeployApplication
     {
-        List<BuildData> GetSiteBuildData(int count);
-        BuildData SaveSiteBuild(BuildData data);
+        List<SiteBuild> GetSiteBuildData(int count);
+        SiteBuild SaveSiteBuild(SiteBuild data);
     }
     public class DeployApplication : IDeployApplication
     {
@@ -18,34 +18,33 @@ namespace api.Application
         {
             _repository = repository;
         }
-        public List<BuildData> GetSiteBuildData(int count)
+        public List<SiteBuild> GetSiteBuildData(int count)
         {
             return _repository.GetSiteBuildData(count);
         }
 
-        public BuildData SaveSiteBuild(BuildData data)
+        public SiteBuild SaveSiteBuild(SiteBuild data)
         {
-            if (data.id == 0)
+            if (data.Id == "")
             {
-                return _repository.CreateSiteBuild(new BuildData(data.hash, data.message));
+                return _repository.StoreSiteBuild(new SiteBuild(data.Hash, data.Message));
             }
 
             return UpdateSiteBuild(data);
         }
 
-        private BuildData UpdateSiteBuild(BuildData data)
+        private SiteBuild UpdateSiteBuild(SiteBuild data)
         {
-            var dbdata = _repository.Get(data.id);
+            var dbdata = _repository.Get(data.Id);
             if (dbdata == null)
             {
                 throw new ArgumentException("data not found");
             }
 
-            dbdata.status = data.status;
-            dbdata.updated = DateTime.Now;
+            dbdata.Status = data.Status;
+            dbdata.Updated = DateTime.Now;
 
-            _repository.SaveChanges();
-            return dbdata;
+            return _repository.StoreSiteBuild(data);
         }
     }
 }
