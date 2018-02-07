@@ -19,7 +19,7 @@ namespace api.Controllers
             _application = application;
         }
 
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(Response<List<SiteBuild>>), Description = "GetSiteBuilds")]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(Response<List<BuildData>>), Description = "GetSiteBuilds")]
         [HttpGet]
         [Route("sitebuilds/{count}")]
         public IActionResult GetSiteBuilds(int count)
@@ -30,17 +30,17 @@ namespace api.Controllers
             var value = _application.GetSiteBuildData(count);
             return Ok(new Response<List<SiteBuild>>(value));
         }
-
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(Response<SiteBuild>), Description = "SaveSiteBuild")]
-        [HttpPost]
-        [Route("sitebuilds")]
-        public IActionResult SaveSiteBuild([FromBody] SiteBuild data)
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(Response<List<BuildData>>), Description = "GetApiBuilds")]
+        [HttpGet]
+        [Route("apibuilds/{count}")]
+        public IActionResult GetApiBuilds(int count)
         {
-            if(data == null){
+            if (count == 0)
+            {
                 return BadRequest();
             }
-            var value = _application.SaveSiteBuild(data);
-            return Ok(new Response<SiteBuild>(value));
+            var value = _application.GetApiBuildData(count);
+            return Ok(new Response<List<ApiBuild>>(value));
         }
     }
 }

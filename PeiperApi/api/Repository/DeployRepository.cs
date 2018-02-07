@@ -9,8 +9,7 @@ namespace api.Repository
     public interface IDeployRepository
     {
         List<SiteBuild> GetSiteBuildData(int count);
-        SiteBuild Get(string id);
-        SiteBuild StoreSiteBuild(SiteBuild data);
+        List<ApiBuild> GetApiBuildData(int count);
     }
 
     public class DeployRepository : IDeployRepository
@@ -29,22 +28,11 @@ namespace api.Repository
             }
         }
 
-        public SiteBuild Get(string id)
+        public List<ApiBuild> GetApiBuildData(int count)
         {
             using (var session = _store.OpenSession())
             {
-                return  session.Load<SiteBuild>(id);
-            }
-        }
-
-        public SiteBuild StoreSiteBuild(SiteBuild data)
-        {
-            using (var session = _store.OpenSession())
-            {
-                session.Store(data);
-                session.SaveChanges();
-
-                return data;
+                return session.Query<ApiBuild>().ToList().OrderByDescending(bd => bd.Created).Take(count).ToList();
             }
         }
     }

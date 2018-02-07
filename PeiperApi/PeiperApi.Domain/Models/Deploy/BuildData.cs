@@ -4,22 +4,23 @@ namespace PeiperApi.Domain.Models.Deploy
 {
     public enum BuildStatus
     {
+        QUEUED,
         STARTED,
         FAILED,
         DONE
     }
-    public class SiteBuild : Entity
+    public class BuildData : Entity
     {
         public string Status { get; set; }
         public string Hash { get; set; }
         public string Message { get; set; }
 
-        public SiteBuild()
+        public BuildData()
         {
-            
+
         }
 
-        public SiteBuild(string hash, string message)
+        public BuildData(string hash, string message)
         {
             BuildDataSetup();
             Hash = hash;
@@ -29,7 +30,10 @@ namespace PeiperApi.Domain.Models.Deploy
         public void BuildDataSetup()
         {
             Created = DateTime.Now;
-            Status = BuildStatus.STARTED.ToString();
+            Status = BuildStatus.QUEUED.ToString();
         }
     }
+
+    public class SiteBuild : BuildData { }
+    public class ApiBuild : BuildData { }
 }
