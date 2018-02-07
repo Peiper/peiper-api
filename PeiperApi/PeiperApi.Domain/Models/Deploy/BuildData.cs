@@ -7,7 +7,7 @@ namespace PeiperApi.Domain.Models.Deploy
         QUEUED,
         STARTED,
         FAILED,
-        DONE
+        SUCCESS
     }
     public class BuildData : Entity
     {
